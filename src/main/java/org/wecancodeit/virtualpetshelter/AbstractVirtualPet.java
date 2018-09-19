@@ -1,6 +1,7 @@
 package org.wecancodeit.virtualpetshelter;
 
 abstract class AbstractVirtualPet implements IVirtualPet {
+	protected String description;
 	
 	abstract protected void shiftMaxHydrationBy(int shift);
 	
@@ -17,4 +18,14 @@ abstract class AbstractVirtualPet implements IVirtualPet {
 	abstract protected void shiftMaxHealthBy(int shift);
 	
 	abstract protected void shiftMinHealthBy(int shift);
+	
+	abstract protected void setHydrationMultiplier(double dNewMultiplier);
+	
+	abstract protected void setFullnessMultiplier(double dNewMultiplier);
+	
+	abstract protected void setStimulationMultiplier(double dNewMultiplier);
+	
+	abstract protected void setHealthMultiplier(double dNewMultiplier);
+	
+	abstract protected void setDescription(String new_description);
 }

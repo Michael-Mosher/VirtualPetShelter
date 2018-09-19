@@ -49,4 +49,13 @@ interface IVirtualPet {
 	public void incrementModestHealth();
 	
 	public void incrementPoorHealth();
+	
+	public void decrementHydrationBy(int iDecrementAmount);
+	
+	public void decrementHealthBy(int iDecrementAmount);
+	
+	public void decrementFullnessBy(int iDecrementAmount);
+	
+	public void decrementStimulationBy(int iDecrementAmount);
+
 }

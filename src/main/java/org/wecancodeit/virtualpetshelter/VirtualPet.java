@@ -7,7 +7,6 @@ public class VirtualPet extends AbstractVirtualPet {
 	private int stimulation;
 	private int health;
 	private String name;
-	private String description;
 	private int iTick = 10;
 	private int iMaxHydration = 100;
 	private int iMinHydration = 1;
@@ -21,6 +20,10 @@ public class VirtualPet extends AbstractVirtualPet {
 	private int iSignificant = 30;
 	private int iModest = 10;
 	private int iPoor = 0;
+	private double dHydrationMultiplier = 1;
+	private double dFullnessMultiplier = 1;
+	private double dStimulationMultiplier = 1;
+	private double dHealthMultiplier = 1;
 	
 	
 	public VirtualPet(String name, String description) {
@@ -32,11 +35,31 @@ public class VirtualPet extends AbstractVirtualPet {
 		this.description = description;
 	}
 
-	public void tick() {
-		this.setHydration(this.getHydration() - this.iTick);
-		this.setHealth(this.getHealth() - this.iTick);
-		this.setFullness(this.getFullness() - this.iTick);
-		this.setStimulation(this.getStimulation() - this.iTick);
+	public void tick()
+	{
+		this.decrementHydrationBy(this.iTick);
+		this.decrementFullnessBy(this.iTick);
+		this.decrementStimulationBy(this.iTick);
+	}
+	
+	public void decrementHydrationBy(int iDecrementAmount)
+	{
+		this.setHydration((int) (this.getHydration() - (iDecrementAmount * this.dHydrationMultiplier )));
+	}
+	
+	public void decrementHealthBy(int iDecrementAmount)
+	{
+		this.setHealth((int) (this.getHealth() - (iDecrementAmount * this.dHealthMultiplier)));
+	}
+	
+	public void decrementFullnessBy(int iDecrementAmount)
+	{
+		this.setFullness((int) (this.getFullness() - (iDecrementAmount * this.dFullnessMultiplier)));
+	}
+	
+	public void decrementStimulationBy(int iDecrementAmount)
+	{
+		this.setStimulation((int) (this.getStimulation() - (iDecrementAmount * this.dStimulationMultiplier)));
 	}
 
 	public int getHydration() {
@@ -225,6 +248,32 @@ public class VirtualPet extends AbstractVirtualPet {
 	protected void shiftMinHealthBy(int shift) {
 		this.iMinHealth += shift;
 		this.setHealth(this.getHealth() + 0);
+	}
+	
+
+	protected void setHydrationMultiplier(double dNewMultiplier)
+	{
+		this.dHydrationMultiplier = dNewMultiplier;
+	}
+	
+	protected void setFullnessMultiplier(double dNewMultiplier)
+	{
+		this.dFullnessMultiplier = dNewMultiplier;
+	}
+	
+	protected void setStimulationMultiplier(double dNewMultiplier)
+	{
+		this.dStimulationMultiplier = dNewMultiplier;
+	}
+	
+	protected void setHealthMultiplier(double dNewMultiplier)
+	{
+		this.dHealthMultiplier = dNewMultiplier;
+	}
+	
+	protected void setDescription(String new_description)
+	{
+		this.description = new_description;
 	}
 
 }

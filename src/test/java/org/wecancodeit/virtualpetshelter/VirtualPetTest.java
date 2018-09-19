@@ -30,7 +30,7 @@ public class VirtualPetTest {
 		VirtualPet oPetTest = new VirtualPet("hobo", "a feral, too tired to not get caught");
 		int iExpectedHydration = 90;
 		int iExpectedFullness = 90;
-		int iExpectedHealth = 90;
+		int iExpectedHealth = 100;
 		int iExpectedStimulation = 90;
 		// administer
 		oPetTest.tick();
@@ -52,7 +52,7 @@ public class VirtualPetTest {
 		VirtualPet oPetTest = new VirtualPet("hobo", "a feral, too tired to not get caught");
 		int iExpectedHydration = 90;
 		int iExpectedFullness = 90;
-		int iExpectedHealth = 90;
+		int iExpectedHealth = 100;
 		int iExpectedStimulation = 90;
 		// administer
 		oPetTest.tick();
@@ -74,7 +74,7 @@ public class VirtualPetTest {
 		VirtualPet oPetTest = new VirtualPet("hobo", "a feral, too tired to not get caught");
 		int iExpectedHydration = 90;
 		int iExpectedFullness = 90;
-		int iExpectedHealth = 90;
+		int iExpectedHealth = 100;
 		int iExpectedStimulation = 90;
 		// administer
 		oPetTest.tick();
@@ -103,7 +103,7 @@ public class VirtualPetTest {
 		VirtualPet oPetTest = new VirtualPet("hobo", "a feral, too tired to not get caught");
 		int iExpectedHydration = 90;
 		int iExpectedFullness = 90;
-		int iExpectedHealth = 90;
+		int iExpectedHealth = 100;
 		int iExpectedStimulation = 90;
 		// administer
 		oPetTest.tick();
@@ -130,7 +130,7 @@ public class VirtualPetTest {
 		VirtualPet oPetTest = new VirtualPet("hobo", "a feral, too tired to not get caught");
 		int iExpectedHydration = 90;
 		int iExpectedFullness = 90;
-		int iExpectedHealth = 90;
+		int iExpectedHealth = 100;
 		int iExpectedStimulation = 90;
 		// administer
 		oPetTest.tick();
@@ -185,7 +185,7 @@ public class VirtualPetTest {
 		VirtualPet oPetTest = new VirtualPet("hobo", "a feral, too tired to not get caught");
 		int iExpectedHydration = 1;
 		int iExpectedFullness = 1;
-		int iExpectedHealth = 1;
+		int iExpectedHealth = 100;
 		int iExpectedStimulation = 1;
 		// administer
 		oPetTest.tick();
@@ -197,6 +197,116 @@ public class VirtualPetTest {
 		oPetTest.tick();
 		oPetTest.tick();
 		oPetTest.tick();
+		oPetTest.tick();
+		// assert
+		int actualHydro = oPetTest.getHydration();
+		int actualFull = oPetTest.getFullness();
+		int actualHealth = oPetTest.getHealth();
+		int actualStimulation = oPetTest.getStimulation();
+		assertThat(iExpectedHydration, is(actualHydro));
+		assertThat(iExpectedFullness, is(actualFull));
+		assertThat(iExpectedHealth, is(actualHealth));
+		assertThat(iExpectedStimulation, is(actualStimulation));
+	}
+	
+	@Test
+	public void assertHealth87DiabetesOneTick()
+	{
+		// assemble
+		AbstractVirtualPet oPetTest = new DiabetesVP( new VirtualPet("hobo", "a feral, too tired to not get caught"));
+		int iExpectedHydration = 90;
+		int iExpectedFullness = 90;
+		int iExpectedHealth = 100;
+		int iExpectedStimulation = 90;
+		// administer
+		oPetTest.tick();
+		// assert
+		int actualHydro = oPetTest.getHydration();
+		int actualFull = oPetTest.getFullness();
+		int actualHealth = oPetTest.getHealth();
+		int actualStimulation = oPetTest.getStimulation();
+		assertThat(iExpectedHydration, is(actualHydro));
+		assertThat(iExpectedFullness, is(actualFull));
+		assertThat(iExpectedHealth, is(actualHealth));
+		assertThat(iExpectedStimulation, is(actualStimulation));
+	}
+	
+	@Test
+	public void assertHydration87SmallTongueOneTick()
+	{
+		// assemble
+		AbstractVirtualPet oPetTest = new SmallTongueVP( new VirtualPet("hobo", "a feral, too tired to not get caught"));
+		int iExpectedHydration = 87;
+		int iExpectedFullness = 90;
+		int iExpectedHealth = 100;
+		int iExpectedStimulation = 90;
+		// administer
+		oPetTest.tick();
+		// assert
+		int actualHydro = oPetTest.getHydration();
+		int actualFull = oPetTest.getFullness();
+		int actualHealth = oPetTest.getHealth();
+		int actualStimulation = oPetTest.getStimulation();
+		assertThat(iExpectedHydration, is(actualHydro));
+		assertThat(iExpectedFullness, is(actualFull));
+		assertThat(iExpectedHealth, is(actualHealth));
+		assertThat(iExpectedStimulation, is(actualStimulation));
+	}
+	
+	@Test
+	public void assertHealth95BigChestOneTickOneSignificantIncrement()
+	{
+		// assemble
+		AbstractVirtualPet oPetTest = new BigChestVP( new VirtualPet("hobo", "a feral, too tired to not get caught"));
+		int iExpectedHydration = 90;
+		int iExpectedFullness = 90;
+		int iExpectedHealth = 105;
+		int iExpectedStimulation = 90;
+		// administer
+		oPetTest.tick();
+		oPetTest.incrementSignificantHealth();
+		// assert
+		int actualHydro = oPetTest.getHydration();
+		int actualFull = oPetTest.getFullness();
+		int actualHealth = oPetTest.getHealth();
+		int actualStimulation = oPetTest.getStimulation();
+		assertThat(iExpectedHydration, is(actualHydro));
+		assertThat(iExpectedFullness, is(actualFull));
+		assertThat(iExpectedHealth, is(actualHealth));
+		assertThat(iExpectedStimulation, is(actualStimulation));
+	}
+	
+	@Test
+	public void assertStimulation85EmphysemaNoTick()
+	{
+		// assemble
+		AbstractVirtualPet oPetTest = new EmphysemaVP( new VirtualPet("hobo", "a feral, too tired to not get caught"));
+		int iExpectedHydration = 100;
+		int iExpectedFullness = 100;
+		int iExpectedHealth = 100;
+		int iExpectedStimulation = 85;
+		// administer
+		// assert
+		int actualHydro = oPetTest.getHydration();
+		int actualFull = oPetTest.getFullness();
+		int actualHealth = oPetTest.getHealth();
+		int actualStimulation = oPetTest.getStimulation();
+		assertThat(iExpectedHydration, is(actualHydro));
+		assertThat(iExpectedFullness, is(actualFull));
+		assertThat(iExpectedHealth, is(actualHealth));
+		assertThat(iExpectedStimulation, is(actualStimulation));
+	}
+	
+	@Test
+	public void assertHealth90DirtyCageEmphysemaOneTick()
+	{
+		// assemble
+		AbstractVirtualPet oPetTest = new DirtyCage( new EmphysemaVP( new VirtualPet("hobo", "a feral, too tired to not get caught")));
+		int iExpectedHydration = 90;
+		int iExpectedFullness = 90;
+		int iExpectedHealth = 90;
+		int iExpectedStimulation = 75;
+		// administer
 		oPetTest.tick();
 		// assert
 		int actualHydro = oPetTest.getHydration();
